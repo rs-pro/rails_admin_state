@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = RailsAdminStateMachine::VERSION
   spec.authors       = ["glebtv"]
   spec.email         = ["glebtv@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Manage model's state with state_machine and rails_admin}
+  spec.summary       = %q{Manage model's state with state_machine and rails_admin}
+  spec.homepage      = "https://github.com/rs-pro/rails_admin_state_machine"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

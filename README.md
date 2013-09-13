@@ -1,8 +1,8 @@
 # RailsAdminStateMachine
 
-TODO: Write a gem description
+Allows easily sending state_machine events to a model from Rails Admin
 
-## Installation
+## Installing
 
 Add this line to your application's Gemfile:
 
@@ -18,7 +18,53 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+Add the set_state action:
+
+    RailsAdmin.config do |config|
+      config.actions do
+        ......
+        state_machine
+      end
+    end
+
+Make the field you need display as state_machine:
+
+    rails_admin do
+      list do
+        field :enabled, :state_machine
+        ...
+      end
+      ...
+    end
+
+States and event names button classes and I18N:
+
+    rails_admin do
+      list do
+        field :enabled, :state_machine
+        ...
+      end
+      ...
+      state_machine({
+        events: {reject: 'btn-warning'}
+        states: {on_moderation: 'btn-warning'}
+      })
+    end
+  
+i18n:
+
+  ru:
+    states:
+      model_name:
+        rejected: 'Post Rejected'
+    events:
+      model_name:
+        reject: 'Reject Post'
+        
+
+For namespaced models use "/", just as usual: "Blog::Post" is "blog/post"
+
 
 ## Contributing
 
