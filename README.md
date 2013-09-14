@@ -18,7 +18,6 @@ Or install it yourself as:
 
 ## Usage
 
-
 Add the set_state action:
 
     RailsAdmin.config do |config|
@@ -42,7 +41,7 @@ Make the field you need display as state_machine:
       ...
     end
 
-States and event names button classes and I18N:
+### States and event names button classes:
 
     rails_admin do
       list do
@@ -56,7 +55,7 @@ States and event names button classes and I18N:
       })
     end
   
-i18n:
+### i18n:
 
 Just as usual for state_machine, see:
 
