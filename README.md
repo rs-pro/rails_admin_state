@@ -60,7 +60,7 @@ Make the field you need display as state_machine:
       })
     end
   
-### i18n:
+### i18n (state and event names):
 
 Just as usual for state_machine, see:
 
