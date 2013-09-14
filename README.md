@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-Add the set_state action:
+Add the state action:
 
     RailsAdmin.config do |config|
       config.actions do
@@ -32,7 +32,7 @@ Add the set_state action:
       end
     end
 
-Make the field you need display as state_machine:
+Mark the field you need display as state:
 
     rails_admin do
       list do
