@@ -1,4 +1,4 @@
-module RailsAdminStateMachine
+module RailsAdminState
   class Configuration
     def initialize(abstract_model)
       @abstract_model = abstract_model
@@ -39,8 +39,8 @@ module RailsAdminStateMachine
 
     protected
     def config
-      if ::RailsAdmin::Config.model(@abstract_model.model).respond_to? :state_machine
-        ::RailsAdmin::Config.model(@abstract_model.model).state_machine
+      if ::RailsAdmin::Config.model(@abstract_model.model).respond_to? :state
+        ::RailsAdmin::Config.model(@abstract_model.model).state
       else
         {}
       end

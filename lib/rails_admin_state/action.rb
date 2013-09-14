@@ -1,7 +1,7 @@
 module RailsAdmin
   module Config
     module Actions
-      class StateMachine < Base
+      class State < Base
         RailsAdmin::Config::Actions.register(self)
 
         # Is the action acting on the root level (Example: /admin/contact)
@@ -29,8 +29,8 @@ module RailsAdmin
                 else
                   flash[:error] = obj.errors.full_messages.join(', ')
                 end
-              #rescue Exception => e
-                #flash[:error] = I18n.t('admin.state_machine.error', err: e.to_s)
+              rescue Exception => e
+                flash[:error] = I18n.t('admin.state_machine.error', err: e.to_s)
               end
             else
               flash[:error] = I18n.t('admin.state_machine.no_id')

@@ -1,4 +1,4 @@
-# RailsAdminStateMachine
+# RailsAdminState
 
 Allows easily sending state_machine events to a model from Rails Admin
 
@@ -6,7 +6,7 @@ Allows easily sending state_machine events to a model from Rails Admin
 
 Add this line to your application's Gemfile:
 
-    gem 'rails_admin_state_machine'
+    gem 'rails_admin_state'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rails_admin_state_machine
+    $ gem install rails_admin_state
 
 ## Usage
 
@@ -24,7 +24,7 @@ Add the set_state action:
     RailsAdmin.config do |config|
       config.actions do
         ......
-        state_machine
+        state
       end
     end
 
@@ -32,11 +32,11 @@ Make the field you need display as state_machine:
 
     rails_admin do
       list do
-        field :state, :state_machine
+        field :state, :state
         ...
       end
       edit do
-        field :state, :state_machine
+        field :state, :state
         ...
       end
       ...
@@ -46,11 +46,11 @@ States and event names button classes and I18N:
 
     rails_admin do
       list do
-        field :state, :state_machine
+        field :state, :state
         ...
       end
       ...
-      state_machine({
+      state({
         events: {reject: 'btn-warning'}
         states: {on_moderation: 'btn-warning'}
       })

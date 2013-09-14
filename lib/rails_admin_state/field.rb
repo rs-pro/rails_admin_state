@@ -4,7 +4,7 @@ module RailsAdmin
   module Config
     module Fields
       module Types
-        class StateMachine < RailsAdmin::Config::Fields::Base
+        class State < RailsAdmin::Config::Fields::Base
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types::register(self)
           include RailsAdmin::Engine.routes.url_helpers
@@ -22,7 +22,7 @@ module RailsAdmin
           end
 
           register_instance_option :pretty_value do
-            @state_machine_options = ::RailsAdminStateMachine::Configuration.new @abstract_model
+            @state_machine_options = ::RailsAdminState::Configuration.new @abstract_model
 
             state = bindings[:object].send(name)
             state_class = @state_machine_options.state(state)
@@ -37,7 +37,7 @@ module RailsAdmin
               event_class = @state_machine_options.event(event)
               ret << bindings[:view].link_to(
                 events[event].human_name,
-                state_machine_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
+                state_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
                 method: :post, 
                 class: "btn btn-mini #{event_class}",
                 style: 'margin-bottom: 5px;'
