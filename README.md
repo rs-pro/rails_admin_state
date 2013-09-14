@@ -2,6 +2,11 @@
 
 Allows easily sending state_machine events to a model from Rails Admin
 
+## Screenshot
+
+ ![Rails Admin State Machine](https://rscx.ru/state.png)
+
+
 ## Installing
 
 Add this line to your application's Gemfile:
