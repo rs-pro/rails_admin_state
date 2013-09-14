@@ -1,7 +1,7 @@
 # RailsAdminState
 
-Allows easily sending state_machine events to a model from Rails Admin, including support for custom
-state field name and multiple state machines per model.
+Allows easily sending state_machine events to a model from Rails Admin, including support for
+ActiveRecord \ Mongoid and custom state field name and multiple state machines per model.
 
 ## Screenshot
 
