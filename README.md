@@ -46,7 +46,7 @@ Make the field you need display as state_machine:
       ...
     end
 
-### States and event names button classes:
+### States and event button/label custom classes:
 
     rails_admin do
       list do
