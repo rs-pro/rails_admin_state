@@ -16,7 +16,7 @@ module RailsAdmin
           register_instance_option :enum do
             enum = {}
             bindings[:object].class.state_machines[name.to_sym].states.each do |state|
-              enum[state.name.to_s] = state.human_name
+              enum[state.human_name] = state.name.to_s
             end
             enum
           end
