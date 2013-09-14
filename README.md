@@ -32,7 +32,11 @@ Make the field you need display as state_machine:
 
     rails_admin do
       list do
-        field :enabled, :state_machine
+        field :state, :state_machine
+        ...
+      end
+      edit do
+        field :state, :state_machine
         ...
       end
       ...
@@ -42,7 +46,7 @@ States and event names button classes and I18N:
 
     rails_admin do
       list do
-        field :enabled, :state_machine
+        field :state, :state_machine
         ...
       end
       ...
@@ -54,14 +58,10 @@ States and event names button classes and I18N:
   
 i18n:
 
-  ru:
-    states:
-      model_name:
-        rejected: 'Post Rejected'
-    events:
-      model_name:
-        reject: 'Reject Post'
-        
+Just as usual for state_machine, see:
+
+http://rdoc.info/github/pluginaweek/state_machine/master/StateMachine/Integrations/Mongoid
+http://rdoc.info/github/pluginaweek/state_machine/master/StateMachine/Integrations/ActiveRecord
 
 For namespaced models use "/", just as usual: "Blog::Post" is "blog/post"
 

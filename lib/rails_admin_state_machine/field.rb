@@ -13,8 +13,12 @@ module RailsAdmin
             :form_enumeration
           end
 
-          register_instance_option :enum_method do
-            @enum_method ||= (bindings[:object].class.respond_to?("#{name}_enum") || bindings[:object].respond_to?("#{name}_enum")) ? "#{name}_enum" : name
+          register_instance_option :enum do
+            enum = {}
+            bindings[:object].class.state_machines[name.to_sym].states.each do |state|
+              enum[state.name.to_s] = state.human_name
+            end
+            enum
           end
 
           register_instance_option :pretty_value do
@@ -22,15 +26,17 @@ module RailsAdmin
 
             state = bindings[:object].send(name)
             state_class = @state_machine_options.state(state)
+            s = bindings[:object].class.state_machines[name.to_sym].states[state.to_sym]
             ret = [
-              '<div class="label ' + state_class + '">' + I18n.t("state_machine.states.#{@abstract_model.model_name.underscore}.#{state}", default: state.to_s) + '</div>',
+              '<div class="label ' + state_class + '">' + s.human_name + '</div>',
               '<div style="height: 10px;"></div>'
             ]
 
+            events = bindings[:object].class.state_machines[name.to_sym].events
             bindings[:object].send("#{name}_events".to_sym).each do |event|
               event_class = @state_machine_options.event(event)
               ret << bindings[:view].link_to(
-                I18n.t("state_machine.events.#{@abstract_model.model_name.underscore}.#{event}", default: event.to_s),
+                events[event].human_name,
                 state_machine_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
                 method: :post, 
                 class: "btn btn-mini #{event_class}",
@@ -42,6 +48,10 @@ module RailsAdmin
 
           register_instance_option :export_value do
             value.inspect
+          end
+
+          register_instance_option :multiple? do
+            false
           end
         end
       end
