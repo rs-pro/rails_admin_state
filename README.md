@@ -66,6 +66,7 @@ Mark the field you need display as state:
 Just as usual for state_machine, see:
 
 http://rdoc.info/github/pluginaweek/state_machine/master/StateMachine/Integrations/Mongoid
+
 http://rdoc.info/github/pluginaweek/state_machine/master/StateMachine/Integrations/ActiveRecord
 
 For namespaced models use "/", just as usual: "Blog::Post" is "blog/post"
