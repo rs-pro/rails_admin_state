@@ -1,6 +1,7 @@
 # RailsAdminState
 
-Allows easily sending state_machine events to a model from Rails Admin
+Allows easily sending state_machine events to a model from Rails Admin, including support for
+ActiveRecord \ Mongoid and custom state field name and multiple state machines per model.
 
 ## Screenshot
 
@@ -23,7 +24,7 @@ Or install it yourself as:
 
 ## Usage
 
-Add the set_state action:
+Add the state action:
 
     RailsAdmin.config do |config|
       config.actions do
@@ -32,7 +33,7 @@ Add the set_state action:
       end
     end
 
-Make the field you need display as state_machine:
+Mark the field you need display as state:
 
     rails_admin do
       list do
