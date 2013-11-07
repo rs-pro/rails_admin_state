@@ -9,18 +9,6 @@ module RailsAdmin
           RailsAdmin::Config::Fields::Types::register(self)
           include RailsAdmin::Engine.routes.url_helpers
 
-          register_instance_option :partial do
-            :form_enumeration
-          end
-
-          register_instance_option :enum do
-            enum = {}
-            bindings[:object].class.state_machines[name.to_sym].states.each do |state|
-              enum[state.human_name] = state.name.to_s
-            end
-            enum
-          end
-
           register_instance_option :pretty_value do
             @state_machine_options = ::RailsAdminState::Configuration.new @abstract_model
 
@@ -46,8 +34,12 @@ module RailsAdmin
             ('<div style="white-space: normal;">' + ret.join(' ') + '</div>').html_safe
           end
 
-          register_instance_option :export_value do
-            value.inspect
+          register_instance_option :formatted_value do
+            pretty_value
+          end
+
+          register_instance_option :partial do
+            :form_state
           end
 
           register_instance_option :multiple? do
