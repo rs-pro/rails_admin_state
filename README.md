@@ -72,6 +72,7 @@ http://rdoc.info/github/pluginaweek/state_machine/master/StateMachine/Integratio
 
 For namespaced models use "/", just as usual: "Blog::Post" is "blog/post"
 
+State name set this way is also used in .human_state_name, error messages, etc
 
 ## Contributing
 
