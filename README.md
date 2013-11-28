@@ -57,10 +57,13 @@ Mark the field you need display as state:
       end
       ...
       state({
-        events: {reject: 'btn-warning'}
-        states: {on_moderation: 'btn-warning'}
+        events: {dead: 'btn-important', drain: 'btn-warning', alive: 'btn-success'},
+        states: {dead: 'label-important', drain: 'label-warning', alive: 'label-success'}
       })
+
     end
+
+Some classes are preset by default (published, deleted, etc)
   
 ### i18n (state and event names):
 
