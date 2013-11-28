@@ -57,7 +57,7 @@ Mark the field you need display as state:
       end
       ...
       state({
-        events: {dead: 'btn-important', drain: 'btn-warning', alive: 'btn-success'},
+        events: {dead: 'btn-danger', drain: 'btn-warning', alive: 'btn-success'},
         states: {dead: 'label-important', drain: 'label-warning', alive: 'label-success'}
       })
 
