@@ -25,7 +25,6 @@ module RailsAdminState
             trash: 'btn-danger',
           },
       }.merge(config)
-      p @options, config
       @options
     end
 
@@ -42,7 +41,12 @@ module RailsAdminState
     protected
     def config
       begin
-        ::RailsAdmin::Config.model(@abstract_model.model).state
+        opt = ::RailsAdmin::Config.model(@abstract_model.model).state
+        if opt.nil?
+          {}
+        else
+          opt
+        end
       rescue
         {}
       end
