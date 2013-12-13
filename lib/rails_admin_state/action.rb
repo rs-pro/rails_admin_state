@@ -20,18 +20,22 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do |klass|
+            unless @authorization_adapter.authorized?(:all_events, @abstract_model, @object)
+              @authorization_adapter.try(:authorize, params[:event].to_sym, @abstract_model, @object)
+            end
+
             @state_machine_options = ::RailsAdminState::Configuration.new @abstract_model
             if params['id'].present?
               begin
                 raise 'event disabled' if @state_machine_options.disabled?(params[:event].to_sym)
-                obj = @abstract_model.model.find(params['id'])
-                if obj.send("fire_#{params[:attr]}_event".to_sym, params[:event].to_sym)
-                  obj.save!
+                if @object.send("fire_#{params[:attr]}_event".to_sym, params[:event].to_sym)
+                  @object.save!
                   flash[:success] = I18n.t('admin.state_machine.event_fired', attr: params[:method], event: params[:event])
                 else
                   flash[:error] = obj.errors.full_messages.join(', ')
                 end
               rescue Exception => e
+                Rails.logger.error e
                 flash[:error] = I18n.t('admin.state_machine.error', err: e.to_s)
               end
             else

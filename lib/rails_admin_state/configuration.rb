@@ -44,6 +44,9 @@ module RailsAdminState
       options[:disable].include? name.to_sym
     end
 
+    def authorize?
+      options[:authorize]
+    end
 
     protected
     def config

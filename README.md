@@ -66,6 +66,13 @@ Mark the field you need display as state:
 
 Some classes are preset by default (published, deleted, etc)
   
+### CanCan integration
+
+    cannot :manage, Recipes::Recipe
+    can :read, Recipes::Recipe
+    can :state, Recipes::Recipe # required to do any transitions
+    can :all_events, Recipes::Recipe
+
 ### i18n (state and event names):
 
 Just as usual for state_machine, see:

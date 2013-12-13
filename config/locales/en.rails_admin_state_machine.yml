@@ -7,3 +7,4 @@ en:
       event_fired: '%{attr} event %{event} fired'
       error: "Error: %{err}"
       no_id: No ID provided
+      no_event: Don't change
