@@ -22,6 +22,7 @@ module RailsAdmin
 
             events = bindings[:object].class.state_machines[name.to_sym].events
             bindings[:object].send("#{name}_events".to_sym).each do |event|
+              next if @state_machine_options.disabled?(event)
               event_class = @state_machine_options.event(event)
               ret << bindings[:view].link_to(
                 events[event].human_name,

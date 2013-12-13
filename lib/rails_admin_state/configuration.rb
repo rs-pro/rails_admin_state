@@ -24,6 +24,7 @@ module RailsAdminState
             delete: 'btn-danger',
             trash: 'btn-danger',
           },
+          disable: []
       }.merge(config)
       @options
     end
@@ -37,6 +38,12 @@ module RailsAdminState
       return '' if name.nil?
       options[:events][name.to_sym] || ''
     end
+
+    def disabled?(name)
+      return '' if name.nil?
+      options[:disable].include? name.to_sym
+    end
+
 
     protected
     def config

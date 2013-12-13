@@ -59,6 +59,7 @@ Mark the field you need display as state:
       state({
         events: {dead: 'btn-danger', drain: 'btn-warning', alive: 'btn-success'},
         states: {dead: 'label-important', drain: 'label-warning', alive: 'label-success'}
+        disable: [:dead] # disable some events so they are not shown.
       })
 
     end

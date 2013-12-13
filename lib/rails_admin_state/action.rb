@@ -20,8 +20,10 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do |klass|
+            @state_machine_options = ::RailsAdminState::Configuration.new @abstract_model
             if params['id'].present?
               begin
+                raise 'event disabled' if @state_machine_options.disabled?(params[:event].to_sym)
                 obj = @abstract_model.model.find(params['id'])
                 if obj.send("fire_#{params[:attr]}_event".to_sym, params[:event].to_sym)
                   obj.save!
