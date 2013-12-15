@@ -20,7 +20,7 @@ module RailsAdmin
 
         register_instance_option :controller do
           Proc.new do |klass|
-            unless @authorization_adapter.authorized?(:all_events, @abstract_model, @object)
+            unless @authorization_adapter.nil? || @authorization_adapter.authorized?(:all_events, @abstract_model, @object)
               @authorization_adapter.try(:authorize, params[:event].to_sym, @abstract_model, @object)
             end
 
