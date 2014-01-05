@@ -82,6 +82,11 @@ module RailsAdmin
             end
             ('<div style="white-space: normal;">' + ret.join(' ') + '</div>').html_safe
           end
+          
+          register_instance_option :export_value do
+            state = bindings[:object].send(name)
+            bindings[:object].class.state_machines[name.to_sym].states[state.to_sym].human_name
+          end
 
           register_instance_option :partial do
             :form_state
