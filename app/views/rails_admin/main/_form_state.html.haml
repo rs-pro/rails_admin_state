@@ -8,9 +8,7 @@
         var $t = $(this), d = $t.data();
         var $i = $t.parents('.state-widget').find('input')
         $i.val(d.event);
-        console.log($i)
         $t.siblings().removeClass('active')
         $t.addClass('active')
       })
     })
-
