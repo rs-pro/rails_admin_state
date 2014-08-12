@@ -6,7 +6,7 @@ ActiveRecord \ Mongoid and custom state field name and multiple state machines p
 
 ## Screenshot
 
- ![Rails Admin State Machine](https://rscx.ru/state.png)
+ ![Rails Admin State Machine](http://rscz.ru/state.png)
 
 
 ## Installing
