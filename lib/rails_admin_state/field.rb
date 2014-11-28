@@ -21,18 +21,20 @@ module RailsAdmin
               '<div style="height: 10px;"></div>'
             ]
 
-            events = bindings[:object].class.state_machines[name.to_sym].events
-            bindings[:object].send("#{name}_events".to_sym).each do |event|
-              next if @state_machine_options.disabled?(event)
-              next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
-              event_class = @state_machine_options.event(event)
-              ret << bindings[:view].link_to(
-                events[event].human_name,
-                state_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
-                method: :post, 
-                class: "btn btn-mini #{event_class}",
-                style: 'margin-bottom: 5px;'
-              )
+            unless read_only
+              events = bindings[:object].class.state_machines[name.to_sym].events
+              bindings[:object].send("#{name}_events".to_sym).each do |event|
+                next if @state_machine_options.disabled?(event)
+                next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
+                event_class = @state_machine_options.event(event)
+                ret << bindings[:view].link_to(
+                  events[event].human_name,
+                  state_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
+                  method: :post, 
+                  class: "btn btn-mini #{event_class}",
+                  style: 'margin-bottom: 5px;'
+                )
+              end
             end
             ('<div style="white-space: normal;">' + ret.join(' ') + '</div>').html_safe
           end
@@ -54,21 +56,23 @@ module RailsAdmin
               '<div style="height: 10px;"></div>'
             ]
 
-            events = bindings[:object].class.state_machines[name.to_sym].events
             empty = true
-            bindings[:object].send("#{name}_events".to_sym).each do |event|
-              next if @state_machine_options.disabled?(event)
-              next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
-              empty = false
-              event_class = @state_machine_options.event(event)
-              ret << bindings[:view].link_to(
-                events[event].human_name,
-                '#',
-                'data-attr' => name,
-                'data-event' => event,
-                class: "state-btn btn btn-mini #{event_class}",
-                style: 'margin-bottom: 5px;'
-              )
+            unless read_only
+              events = bindings[:object].class.state_machines[name.to_sym].events
+              bindings[:object].send("#{name}_events".to_sym).each do |event|
+                next if @state_machine_options.disabled?(event)
+                next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
+                empty = false
+                event_class = @state_machine_options.event(event)
+                ret << bindings[:view].link_to(
+                  events[event].human_name,
+                  '#',
+                  'data-attr' => name,
+                  'data-event' => event,
+                  class: "state-btn btn btn-mini #{event_class}",
+                  style: 'margin-bottom: 5px;'
+                )
+              end
             end
             unless empty
               ret << bindings[:view].link_to(
