@@ -31,12 +31,12 @@ module RailsAdminState
 
     def state(name)
       return '' if name.nil?
-      options[:states][name.to_sym] || ''
+      options[:states][name.to_sym] || 'label-default'
     end
 
     def event(name)
       return '' if name.nil?
-      options[:events][name.to_sym] || ''
+      options[:events][name.to_sym] || 'btn-default'
     end
 
     def disabled?(name)

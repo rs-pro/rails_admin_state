@@ -20,18 +20,20 @@ module RailsAdmin
               '<div class="label ' + state_class + '">' + s.human_name + '</div>',
               '<div style="height: 10px;"></div>'
             ]
-
             unless read_only
               events = bindings[:object].class.state_machines[name.to_sym].events
               bindings[:object].send("#{name}_events".to_sym).each do |event|
                 next if @state_machine_options.disabled?(event)
-                next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
+                unless bindings[:controller].try(:authorization_adapter).nil? 
+                  adapter = bindings[:controller].authorization_adapter
+                  next unless (adapter.authorized?(:state, @abstract_model, bindings[:object]) && (adapter.authorized?(:all_events, @abstract_model, bindings[:object]) || adapter.authorized?(event, @abstract_model, bindings[:object])))
+                end
                 event_class = @state_machine_options.event(event)
                 ret << bindings[:view].link_to(
                   events[event].human_name,
                   state_path(model_name: @abstract_model, id: bindings[:object].id, event: event, attr: name),
                   method: :post, 
-                  class: "btn btn-mini #{event_class}",
+                  class: "btn btn-mini btn-xs #{event_class}",
                   style: 'margin-bottom: 5px;'
                 )
               end
@@ -61,7 +63,10 @@ module RailsAdmin
               events = bindings[:object].class.state_machines[name.to_sym].events
               bindings[:object].send("#{name}_events".to_sym).each do |event|
                 next if @state_machine_options.disabled?(event)
-                next unless v.authorized?(:state, @abstract_model, bindings[:object]) && (v.authorized?(:all_events, @abstract_model, bindings[:object]) || v.authorized?(event, @abstract_model, bindings[:object]))
+                unless bindings[:controller].try(:authorization_adapter).nil? 
+                  adapter = bindings[:controller].authorization_adapter
+                  next unless (adapter.authorized?(:state, @abstract_model, bindings[:object]) && (adapter.authorized?(:all_events, @abstract_model, bindings[:object]) || adapter.authorized?(event, @abstract_model, bindings[:object])))
+                end
                 empty = false
                 event_class = @state_machine_options.event(event)
                 ret << bindings[:view].link_to(
@@ -69,7 +74,7 @@ module RailsAdmin
                   '#',
                   'data-attr' => name,
                   'data-event' => event,
-                  class: "state-btn btn btn-mini #{event_class}",
+                  class: "state-btn btn btn-mini btn-xs #{event_class}",
                   style: 'margin-bottom: 5px;'
                 )
               end
@@ -80,7 +85,7 @@ module RailsAdmin
                 '#',
                 'data-attr' => name,
                 'data-event' => '',
-                class: "state-btn btn btn-mini active",
+                class: "state-btn btn btn-default btn-mini btn-xs active",
                 style: 'margin-bottom: 5px;'
               )
             end
@@ -94,6 +99,10 @@ module RailsAdmin
 
           register_instance_option :partial do
             :form_state
+          end
+
+          register_instance_option :read_only do
+            false
           end
 
           register_instance_option :allowed_methods do
