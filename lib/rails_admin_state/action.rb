@@ -32,7 +32,7 @@ module RailsAdmin
                   @object.save!
                   flash[:success] = I18n.t('admin.state_machine.event_fired', attr: params[:method], event: params[:event])
                 else
-                  flash[:error] = obj.errors.full_messages.join(', ')
+                  flash[:error] = @object.errors.full_messages.join(', ')
                 end
               rescue Exception => e
                 Rails.logger.error e
@@ -41,7 +41,7 @@ module RailsAdmin
             else
               flash[:error] = I18n.t('admin.state_machine.no_id')
             end
-            redirect_to :back
+            redirect_back(fallback_location: rails_admin.dashboard_path)
           end
         end
 
