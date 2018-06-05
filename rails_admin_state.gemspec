@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["glebtv@gmail.com"]
   spec.description   = %q{Manage model's state with state_machine and rails_admin}
   spec.summary       = %q{Manage model's state with state_machine and rails_admin}
-  spec.homepage      = "https://github.com/rs-pro/rails_admin_state"
+  spec.homepage      = "https://gitlab.com/rocket-science/rails_admin_state"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

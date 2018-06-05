@@ -1,4 +1,9 @@
 # Rails Admin State Machine
+
+Master repository has moved to gitlab, all new code will be there:
+
+https://gitlab.com/rocket-science/rails_admin_state
+
 ### Properly manage [state_machines](https://github.com/state-machines/state_machines) states from rails_admin
 
 Allows easily sending state_machine events to a model from Rails Admin, including support for
